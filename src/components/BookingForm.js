@@ -158,6 +158,7 @@ function BookingForm({ availableTimes, dispatch, submitForm }) {
 
       <button
         type="submit"
+        className="button-primary"
         disabled={!isFormValid}
         aria-describedby={!isFormValid ? 'form-hint' : undefined}
       >

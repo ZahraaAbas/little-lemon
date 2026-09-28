@@ -1,38 +1,32 @@
-.App {
-  text-align: center;
+/* ===== Reusable layout and component classes ===== */
+
+/* Centers content and keeps a safe gap on small screens */
+.container {
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Primary call-to-action button, used the same way on every page */
+.button-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--color-primary-yellow);
+  color: var(--color-highlight-dark);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.button-primary:hover {
+  background-color: var(--color-secondary-salmon);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button-primary:disabled {
+  background-color: var(--color-highlight-light);
+  color: #6b6b6b;
+  cursor: not-allowed;
 }

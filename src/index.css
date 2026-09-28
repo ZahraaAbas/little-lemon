@@ -1,13 +1,90 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ===== Design tokens from the Little Lemon style guide ===== */
+:root {
+  /* Colors */
+  --color-primary-green: #495e57;
+  --color-primary-yellow: #f4ce14;
+  --color-secondary-salmon: #ee9972;
+  --color-secondary-peach: #fbdabb;
+  --color-highlight-light: #edefee;
+  --color-highlight-dark: #333333;
+  --color-white: #ffffff;
+  --color-error: #b00020;
+
+  /* Fonts */
+  --font-display: 'Markazi Text', serif;
+  --font-body: 'Karla', sans-serif;
+
+  /* Shape and spacing */
+  --radius: 16px;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ===== Base styles ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-highlight-dark);
+  background-color: var(--color-white);
+}
+
+/* Headings use the display font */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1;
+  margin: 0 0 var(--space-sm);
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+/* Card titles use the body font, as in the style guide */
+h4 {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-xs);
+}
+
+p {
+  margin: 0 0 var(--space-sm);
+  max-width: 65ch;
+}
+
+span {
+  font-family: var(--font-body);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+/* Clear, visible focus for keyboard users */
+:focus-visible {
+  outline: 3px solid var(--color-secondary-salmon);
+  outline-offset: 2px;
 }
