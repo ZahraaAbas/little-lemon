@@ -1,5 +1,5 @@
 import CallToAction from '../components/CallToAction';
-import Specials from './Specials';
+import Specials from '../components/Specials';
 
 function HomePage() {
   return (

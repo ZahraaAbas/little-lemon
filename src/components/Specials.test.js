@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Specials from '../pages/Specials';
+import Specials from './Specials';
 import specials from '../data/specials';
 
 test('renders one card for each special', () => {
