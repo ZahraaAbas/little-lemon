@@ -1,22 +1,19 @@
 import { useState } from 'react';
 import './BookingForm.css';
 
-function BookingForm() {
+function BookingForm({ availableTimes, dispatch }) {
   // One state variable per form field (controlled inputs)
   const [date, setDate] = useState('');
   const [time, setTime] = useState('17:00');
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState('Birthday');
 
-  // Temporary list of times. This state will be lifted up to Main in the next step.
-  const [availableTimes] = useState([
-    '17:00',
-    '18:00',
-    '19:00',
-    '20:00',
-    '21:00',
-    '22:00',
-  ]);
+  function handleDateChange(e) {
+    const selectedDate = e.target.value;
+    setDate(selectedDate);
+    // Ask Main to update the available times for the new date
+    dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
+  }
 
   function handleSubmit(e) {
     // Stop the browser from reloading the page on submit
@@ -31,7 +28,7 @@ function BookingForm() {
         type="date"
         id="res-date"
         value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={handleDateChange}
       />
 
       <label htmlFor="res-time">Choose time</label>
