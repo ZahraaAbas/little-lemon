@@ -1,0 +1,46 @@
+.site-footer {
+  margin-top: var(--space-lg);
+  padding-block: var(--space-md);
+  background-color: var(--color-highlight-light);
+}
+
+/* Columns wrap automatically: 4 on desktop, fewer on smaller screens */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+}
+
+.footer-title {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+
+.footer-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-style: normal;
+}
+
+.footer-list li,
+.footer-list p {
+  margin-bottom: var(--space-xs);
+}
+
+.footer-list a {
+  text-decoration: none;
+}
+
+.footer-list a:hover {
+  color: var(--color-primary-green);
+  text-decoration: underline;
+}
+
+.footer-copyright {
+  margin-top: var(--space-md);
+  max-width: none;
+  text-align: center;
+}
