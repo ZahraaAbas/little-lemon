@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './BookingForm.css';
 
-function BookingForm({ availableTimes, dispatch }) {
+function BookingForm({ availableTimes, dispatch , submitForm}) {
   // One state variable per form field (controlled inputs)
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState('Birthday');
+  const [submitError, setSubmitError] = useState('');
 
   function handleDateChange(e) {
   const selectedDate = e.target.value;
@@ -16,13 +17,23 @@ function BookingForm({ availableTimes, dispatch }) {
   // Ask Main to update the available times for the new date
   dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
 }
+function handleSubmit(e) {
+  // Stop the browser from reloading the page on submit
+  e.preventDefault();
+  setSubmitError('');
 
-  function handleSubmit(e) {
-    // Stop the browser from reloading the page on submit
-    e.preventDefault();
-    // TODO: send the form data to the API
+  const formData = {
+    date,
+    time,
+    guests: Number(guests),
+    occasion,
+  };
+
+  const isSubmitted = submitForm(formData);
+  if (!isSubmitted) {
+    setSubmitError('Sorry, we could not complete your booking. Please try again.');
   }
-
+}
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
       <label htmlFor="res-date">Choose date</label>
@@ -68,7 +79,13 @@ function BookingForm({ availableTimes, dispatch }) {
         <option value="Birthday">Birthday</option>
         <option value="Anniversary">Anniversary</option>
       </select>
+{submitError && (
+  <p className="form-error" role="alert">
+    {submitError}
+  </p>
+)}
 
+<button type="submit">Make Your reservation</button>
       <button type="submit">Make Your reservation</button>
     </form>
   );
