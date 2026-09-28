@@ -1,0 +1,39 @@
+.special-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background-color: var(--color-highlight-light);
+}
+
+.special-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.special-card-body {
+  padding: var(--space-sm);
+}
+
+.special-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+/* Card title style from the style guide: Karla 18pt bold */
+.special-card-title {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Highlight text style for prices */
+.special-card-price {
+  font-weight: 500;
+  color: #a4471f;
+}

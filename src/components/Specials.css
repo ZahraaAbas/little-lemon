@@ -1,0 +1,10 @@
+.specials {
+  padding-block: var(--space-lg) 0;
+}
+
+/* 3 cards on desktop, fewer on smaller screens, without media queries */
+.specials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+}
