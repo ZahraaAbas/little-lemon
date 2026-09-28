@@ -1,7 +1,9 @@
+import CallToAction from '../components/CallToAction';
+
 function HomePage() {
   return (
     <>
-      Homepage
+      <CallToAction />
     </>
   );
 }
