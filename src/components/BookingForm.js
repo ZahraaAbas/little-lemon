@@ -4,16 +4,18 @@ import './BookingForm.css';
 function BookingForm({ availableTimes, dispatch }) {
   // One state variable per form field (controlled inputs)
   const [date, setDate] = useState('');
-  const [time, setTime] = useState('17:00');
+  const [time, setTime] = useState('');
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState('Birthday');
 
   function handleDateChange(e) {
-    const selectedDate = e.target.value;
-    setDate(selectedDate);
-    // Ask Main to update the available times for the new date
-    dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
-  }
+  const selectedDate = e.target.value;
+  setDate(selectedDate);
+  // The old time may not be available on the new date
+  setTime('');
+  // Ask Main to update the available times for the new date
+  dispatch({ type: 'UPDATE_TIMES', date: selectedDate });
+}
 
   function handleSubmit(e) {
     // Stop the browser from reloading the page on submit
@@ -33,16 +35,19 @@ function BookingForm({ availableTimes, dispatch }) {
 
       <label htmlFor="res-time">Choose time</label>
       <select
-        id="res-time"
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
-      >
-        {availableTimes.map((availableTime) => (
-          <option key={availableTime} value={availableTime}>
-            {availableTime}
-          </option>
-        ))}
-      </select>
+  id="res-time"
+  value={time}
+  onChange={(e) => setTime(e.target.value)}
+>
+  <option value="" disabled>
+    Select a time
+  </option>
+  {availableTimes.map((availableTime) => (
+    <option key={availableTime} value={availableTime}>
+      {availableTime}
+    </option>
+  ))}
+</select>
 
       <label htmlFor="guests">Number of guests</label>
       <input

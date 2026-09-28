@@ -1,15 +1,21 @@
-// Returns the initial list of available booking times.
+import { fetchAPI } from './api';
+
+// Returns the available booking times for today.
 export function initializeTimes() {
-  return ['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'];
+  return fetchAPI(new Date());
 }
 
-// Reducer for availableTimes.
-// For now it returns the same times for any date.
-// Later it will fetch the times for the selected date from the API.
+// Reducer for availableTimes: fetches the times for the selected date.
 export function updateTimes(state, action) {
   switch (action.type) {
     case 'UPDATE_TIMES':
-      return state;
+      // Keep the current times if the date field was cleared
+      if (!action.date) {
+        return state;
+      }
+      // The date input gives a string like "2026-10-01".
+      // Adding "T00:00" makes JavaScript read it in local time, not UTC.
+      return fetchAPI(new Date(`${action.date}T00:00`));
     default:
       return state;
   }
