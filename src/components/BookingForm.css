@@ -4,3 +4,14 @@
   max-width: 200px;
   gap: 20px;
 }
+
+.form-error {
+  margin: 0;
+  color: #b00020;
+  font-size: 0.875rem;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.875rem;
+}
