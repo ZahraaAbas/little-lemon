@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import hamburgerIcon from '../assets/icon-hamburger.svg';
 import './Nav.css';
@@ -6,6 +6,23 @@ import './Nav.css';
 function Nav() {
   // Controls the mobile menu. On large screens the links are always visible.
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close the mobile menu when the user presses Escape
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    // Cleanup: remove the listener when the menu closes or the component unmounts
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isMenuOpen]);
 
   function toggleMenu() {
     setIsMenuOpen((prevIsOpen) => !prevIsOpen);

@@ -1,70 +1,171 @@
-# Getting Started with Create React App
+# Little Lemon: Table Reservation Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive, accessible React web app that lets customers of **Little Lemon**, a family-owned Mediterranean restaurant in Chicago, reserve a table online.
 
-## Available Scripts
+Built as the capstone project of the **Meta Front-End Developer Professional Certificate** (Coursera).
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## The problem
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Little Lemon customers could not reserve a table online. This made booking harder for customers and gave the restaurant less information for planning staff and supplies.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## The solution
 
-### `npm test`
+A simple reservation flow, based on the needs found in user research:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+Homepage → Reserve a Table → Choose date → Choose time → Guests → Occasion → Confirm → Confirmation page
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Booking form** with date, time, number of guests and occasion
+- **Available times update** automatically when the date changes (from the course booking API)
+- **Client-side validation** (HTML5 and React) with clear error messages next to each field
+- **Confirmation page** showing the booking details
+- **Edge cases handled**: past dates, invalid guest numbers, unavailable times, API failure, opening the confirmation page without a booking
+- **Homepage** with hero, weekly specials, customer testimonials and the restaurant story
+- **Responsive design**: mobile, tablet and desktop, with a mobile navigation menu
+- **Accessible**: Lighthouse Accessibility score of **100** on the homepage and booking page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## Tech stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Tool | Use |
+| --- | --- |
+| React 19 (Create React App) | UI and state |
+| React Router 6 | Page navigation |
+| Jest and React Testing Library | Unit tests |
+| Plain CSS with CSS variables | Styling based on the Little Lemon style guide |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+No extra UI or form libraries were used, to keep the project simple.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Getting started
 
-## Learn More
+### Prerequisites
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Node.js](https://nodejs.org/) 18 or newer
+- npm (installed with Node.js)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Installation
 
-### Code Splitting
+```bash
+git clone https://github.com/ZahraaAbas/little-lemon.git
+cd little-lemon
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Run the app
 
-### Analyzing the Bundle Size
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Then open [http://localhost:3000](http://localhost:3000).
 
-### Making a Progressive Web App
+### Run the tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm test -- --watchAll=false
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Project structure
 
-### Deployment
+```
+src/
+├── assets/        Images and icons (resized and compressed)
+├── components/    Reusable UI parts (Header, Nav, BookingForm, SpecialCard...)
+├── data/          Local data for specials and testimonials
+├── hooks/         Custom hooks (usePageTitle)
+├── pages/         One component per route (HomePage, BookingPage, ConfirmedBooking)
+├── utils/         Logic without UI: API, booking times reducer, validation
+├── App.js         Layout: header, main content and footer
+└── index.js       Entry point, wraps the app in BrowserRouter
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Each test file sits next to the file it tests (for example `BookingForm.test.js`).
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## How it works
+
+### State management
+
+- `availableTimes` lives in `Main` and is managed with **`useReducer`**, so it can be shared between the booking page and the confirmation flow.
+- `initializeTimes()` gets today's times and `updateTimes()` gets the times for the selected date. Both are pure functions in `src/utils/bookingTimes.js`, which makes them easy to test.
+- The form uses **controlled inputs**: every field value is stored in React state.
+
+### Validation
+
+- **HTML5 attributes** (`required`, `min`, `max`, `step`) describe the rules to the browser.
+- **`validateBooking()`** in `src/utils/validation.js` returns an error message for each invalid field.
+- Errors appear only **after the user leaves a field**, so the form does not look wrong before the user has started.
+- The submit button stays disabled until the form is valid, and a hint explains why.
+
+---
+
+## Accessibility
+
+- Semantic HTML: `header`, `nav`, `main`, `section`, `article`, `footer`, `address`, `time`, `dl`
+- Every input has a connected `<label>` (`htmlFor` and `id`)
+- Error messages are linked to their field with `aria-describedby` and `aria-invalid`
+- API errors are announced with `role="alert"`
+- Meaningful `alt` text for images, and empty `alt` for decorative icons
+- Star ratings have a text version for screen readers ("Rated 4 out of 5")
+- Mobile menu button uses `aria-expanded` and `aria-controls`, and closes with **Escape**
+- Current page link is marked with `aria-current="page"`
+- **Skip to main content** link for keyboard users
+- Visible focus outline, and a unique page title for each page
+- Colour contrast checked against WCAG AA
+
+---
+
+## Testing
+
+**35 unit tests** in 7 test suites cover:
+
+- `initializeTimes` and `updateTimes` (including an empty date)
+- `validateBooking` in both **valid and invalid** states
+- HTML5 validation attributes on every form field
+- Showing errors after leaving a field, and the disabled submit button
+- Submitting the form, and showing an error when the API fails
+- Navigation menu (`aria-expanded`, `aria-current`, Escape key)
+- Specials and testimonials rendering from their data
+- Page title and skip link
+
+---
+
+## Design and technical decisions
+
+| Decision | Reason |
+| --- | --- |
+| The course API (`api.js`) is copied into `src/utils` | GitHub serves the original file as `text/plain` with `nosniff`, so browsers refuse to run it from a `<script>` tag. Importing it also lets Jest use it in tests. |
+| React Router **6** instead of 7 | The course is based on v6, and v7 fails in the Create React App Jest setup (`TextEncoder is not defined`). |
+| Dates are read as local time (`"2026-10-01T00:00"`) | Avoids showing the times for the wrong day in time zones behind UTC. |
+| Some colours are darker than the style guide (prices, star ratings) | The original orange and yellow did not have enough contrast on light backgrounds. |
+| `aria-label` is used only where there is no visible text | For example the icon-only menu button. The booking button keeps its visible text as its accessible name. |
+| "Online Menu" and "Order a delivery" links from the wireframe are not included | There are no menu or ordering pages yet, and links that lead nowhere would confuse users. |
+| Images were resized and compressed | Some original images were up to 20 MB. They are now under 250 KB each. |
+
+---
+
+## Future improvements
+
+- Seating options (indoor or outdoor) and an additional comments field, as suggested in the user research
+- Menu, online ordering and login pages
+- A real booking back end with email confirmation
+- Allow customers to change or cancel a booking
+
+---
+
+## Author
+
+**Zahraa Abas**: [GitHub](https://github.com/ZahraaAbas)

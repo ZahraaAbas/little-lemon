@@ -1,25 +1,18 @@
-import TestimonialCard from './TestimonialCard';
-import testimonials from '../data/testimonials';
-import './CustomersSay.css';
-
-function CustomersSay() {
-  return (
-    <section className="customers-say" aria-labelledby="customers-say-title">
-      <div className="container">
-        <h2 id="customers-say-title">What our customers say</h2>
-        <div className="testimonials-grid">
-          {testimonials.map((testimonial) => (
-            <TestimonialCard
-              key={testimonial.id}
-              name={testimonial.name}
-              rating={testimonial.rating}
-              review={testimonial.review}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+.customers-say {
+  margin-top: var(--space-lg);
+  padding-block: var(--space-lg);
+  background-color: var(--color-primary-green);
+  color: var(--color-white);
 }
 
-export default CustomersSay;
+.customers-say h2 {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+/* 4 cards on desktop, fewer on smaller screens */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+}

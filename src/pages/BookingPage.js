@@ -1,7 +1,10 @@
 import BookingForm from '../components/BookingForm';
 import './BookingPage.css';
+import usePageTitle from '../hooks/usePageTitle';
 
 function BookingPage({ availableTimes, dispatch, submitForm }) {
+  usePageTitle('Booking');
+
   return (
     <>
       <section className="page-header" aria-labelledby="booking-title">

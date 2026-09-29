@@ -22,7 +22,7 @@ function Main() {
   }
 
   return (
-    <main>
+    <main id="main-content" tabIndex="-1">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route

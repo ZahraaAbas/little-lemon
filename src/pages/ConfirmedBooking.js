@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import usePageTitle from '../hooks/usePageTitle';
 import './ConfirmedBooking.css';
 
 // Turns "2026-10-01" into "Thursday, October 1, 2026"
@@ -15,6 +16,9 @@ function ConfirmedBooking() {
   // The booking details are sent here by navigate() in Main
   const location = useLocation();
   const booking = location.state;
+
+  // Hooks must run before any early return, so the title is chosen here
+  usePageTitle(booking ? 'Booking Confirmed' : 'No Booking Found');
 
   // Edge case: the user opened /confirmed directly without booking
   if (!booking) {

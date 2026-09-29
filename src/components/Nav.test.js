@@ -33,3 +33,14 @@ test('marks the current page link with aria-current', () => {
     'aria-current'
   );
 });
+
+test('pressing Escape closes the open menu', () => {
+  renderNav();
+  const menuButton = screen.getByRole('button', { name: /navigation menu/i });
+
+  fireEvent.click(menuButton);
+  expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+
+  fireEvent.keyDown(document, { key: 'Escape' });
+  expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+});

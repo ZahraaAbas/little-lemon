@@ -17,3 +17,17 @@ test('renders the homepage with the main heading and a reservation link', () => 
     '/booking'
   );
 });
+
+test('sets the page title and provides a skip link', () => {
+  render(
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <App />
+    </BrowserRouter>
+  );
+
+  expect(document.title).toBe('Home | Little Lemon');
+  expect(screen.getByRole('link', { name: /skip to main content/i })).toHaveAttribute(
+    'href',
+    '#main-content'
+  );
+});
