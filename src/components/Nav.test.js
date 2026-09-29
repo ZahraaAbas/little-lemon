@@ -4,7 +4,10 @@ import Nav from './Nav';
 
 function renderNav(initialPath = '/') {
   render(
-    <MemoryRouter initialEntries={[initialPath]}>
+    <MemoryRouter
+  initialEntries={[initialPath]}
+  future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+>
       <Nav />
     </MemoryRouter>
   );

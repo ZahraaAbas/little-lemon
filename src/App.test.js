@@ -4,7 +4,7 @@ import App from './App';
 
 test('renders the homepage with the main heading and a reservation link', () => {
   render(
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <App />
     </BrowserRouter>
   );

@@ -1,0 +1,45 @@
+.chicago {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: center;
+  padding-block: var(--space-lg) 0;
+}
+
+.chicago-subtitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-primary-green);
+}
+
+/* Both images sit in the same grid row and overlap */
+.chicago-images {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.chicago-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  grid-row: 1;
+}
+
+.chicago-image-a {
+  grid-column: 1 / 8;
+}
+
+.chicago-image-b {
+  grid-column: 4 / 11;
+  margin-top: 35%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Tablet and desktop: text and images side by side */
+@media (min-width: 768px) {
+  .chicago {
+    grid-template-columns: 1fr 1fr;
+  }
+}
