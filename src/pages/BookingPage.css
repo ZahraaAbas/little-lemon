@@ -1,0 +1,20 @@
+/* Green page header, matching the homepage hero */
+.page-header {
+  padding-block: var(--space-md);
+  background-color: var(--color-primary-green);
+  color: var(--color-white);
+}
+
+.page-header h1 {
+  color: var(--color-primary-yellow);
+}
+
+.page-header p {
+  margin-bottom: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.booking-layout {
+  padding-block: var(--space-md);
+}

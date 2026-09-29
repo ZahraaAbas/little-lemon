@@ -1,22 +1,57 @@
-/* Temporary layout from the course exercise. Styling will be improved later. */
 .booking-form {
   display: grid;
-  max-width: 200px;
-  gap: 20px;
+  gap: var(--space-xs);
+  max-width: 500px;
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  background-color: var(--color-highlight-light);
 }
 
-.form-error {
-  margin: 0;
-  color: #b00020;
-  font-size: 0.875rem;
+.booking-form label {
+  margin-top: var(--space-sm);
+  font-weight: 700;
 }
 
-.form-hint {
-  margin: 0;
-  font-size: 0.875rem;
+.booking-form label:first-of-type {
+  margin-top: 0;
 }
+
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem;
+  border: 2px solid #767676;
+  border-radius: 8px;
+  background-color: var(--color-white);
+  color: var(--color-highlight-dark);
+  font: inherit;
+}
+
+.booking-form input:focus-visible,
+.booking-form select:focus-visible {
+  border-color: var(--color-primary-green);
+}
+
+/* Red border on fields with an error */
+.booking-form [aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.booking-form .button-primary {
+  width: 100%;
+  min-height: 48px;
+  margin-top: var(--space-sm);
+}
+
 .form-error {
   margin: 0;
   color: var(--color-error);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.form-hint {
+  margin: var(--space-sm) 0 0;
   font-size: 0.875rem;
 }

@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import './ConfirmedBooking.css';
 
 // Turns "2026-10-01" into "Thursday, October 1, 2026"
 function formatDate(dateString) {
@@ -18,19 +19,21 @@ function ConfirmedBooking() {
   // Edge case: the user opened /confirmed directly without booking
   if (!booking) {
     return (
-      <section>
+      <section className="container confirmation">
         <h1>No booking found</h1>
         <p>It looks like you have not made a reservation yet.</p>
-        <Link to="/booking">Reserve a table</Link>
+        <Link to="/booking" className="button-primary">
+          Reserve a table
+        </Link>
       </section>
     );
   }
 
   return (
-    <section>
+    <section className="container confirmation">
       <h1>Your table is booked!</h1>
       <p>Thank you for choosing Little Lemon. Here are your booking details:</p>
-      <dl>
+      <dl className="confirmation-details">
         <dt>Date</dt>
         <dd>
           <time dateTime={booking.date}>{formatDate(booking.date)}</time>
@@ -42,7 +45,9 @@ function ConfirmedBooking() {
         <dt>Occasion</dt>
         <dd>{booking.occasion}</dd>
       </dl>
-      <Link to="/">Back to homepage</Link>
+      <Link to="/" className="button-primary">
+        Back to homepage
+      </Link>
     </section>
   );
 }
